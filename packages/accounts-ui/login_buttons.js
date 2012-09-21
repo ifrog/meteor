@@ -31,55 +31,63 @@
 
   Template.loginButtons.events = {
     'click #login-buttons-Facebook': function () {
-      try {
-        Meteor.loginWithFacebook();
-      } catch (e) {
-        if (e instanceof Meteor.accounts.ConfigError)
+      resetMessages();
+      Meteor.loginWithFacebook(function (e) {
+        if (!e || e instanceof Meteor.accounts.LoginCancelledError) {
+          // do nothing
+        } else if (e instanceof Meteor.accounts.ConfigError) {
           alert("Facebook API key not set. Configure app details with "
                 + "Meteor.accounts.facebook.config() "
                 + "and Meteor.accounts.facebook.setSecret()");
-        else
-          throw e;
-      }
+        } else {
+          Session.set(ERROR_MESSAGE_KEY, e.reason || "Unknown error");
+        }
+      });
     },
 
     'click #login-buttons-Google': function () {
-      try {
-        Meteor.loginWithGoogle();
-      } catch (e) {
-        if (e instanceof Meteor.accounts.ConfigError)
+      resetMessages();
+      Meteor.loginWithGoogle(function (e) {
+        if (!e || e instanceof Meteor.accounts.LoginCancelledError) {
+          // do nothing
+        } else if (e instanceof Meteor.accounts.ConfigError) {
           alert("Google API key not set. Configure app details with "
                 + "Meteor.accounts.google.config() and "
                 + "Meteor.accounts.google.setSecret()");
-        else
-          throw e;
-      };
+        } else {
+          Session.set(ERROR_MESSAGE_KEY, e.reason || "Unknown error");
+        }
+      });
     },
 
     'click #login-buttons-Weibo': function () {
-      try {
-        Meteor.loginWithWeibo();
-      } catch (e) {
-        if (e instanceof Meteor.accounts.ConfigError)
+      resetMessages();
+      Meteor.loginWithWeibo(function (e) {
+        if (!e || e instanceof Meteor.accounts.LoginCancelledError) {
+          // do nothing
+        } else if (e instanceof Meteor.accounts.ConfigError) {
           alert("Weibo API key not set. Configure app details with "
                 + "Meteor.accounts.weibo.config() and "
                 + "Meteor.accounts.weibo.setSecret()");
-        else
-          throw e;
-      };
+        } else {
+          Session.set(ERROR_MESSAGE_KEY, e.reason || "Unknown error");
+        }
+      });
     },
 
     'click #login-buttons-Twitter': function () {
-      try {
-        Meteor.loginWithTwitter();
-      } catch (e) {
-        if (e instanceof Meteor.accounts.ConfigError)
+      resetMessages();
+      Meteor.loginWithTwitter(function (e) {
+        if (!e || e instanceof Meteor.accounts.LoginCancelledError) {
+          // do nothing
+        } else if (e instanceof Meteor.accounts.ConfigError) {
           alert("Twitter API key not set. Configure app details with "
                 + "Meteor.accounts.twitter.config() and "
                 + "Meteor.accounts.twitter.setSecret()");
-        else
-          throw e;
-      };
+        } else {
+          Session.set(ERROR_MESSAGE_KEY, e.reason || "Unknown error");
+        }
+      });
     },
 
     'click #login-buttons-logout': function() {
