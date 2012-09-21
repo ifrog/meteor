@@ -1,5 +1,5 @@
 (function () {
-  Meteor.loginWithTwitter = function () {
+  Meteor.loginWithTwitter = function (callback) {
     if (!Meteor.accounts.twitter._appUrl)
       throw new Meteor.accounts.ConfigError("Need to call Meteor.accounts.twitter.config first");
 
@@ -18,7 +18,7 @@
           + encodeURIComponent(callbackUrl)
           + '&state=' + state;
 
-    Meteor.accounts.oauth.initiateLogin(state, url);
+    Meteor.accounts.oauth.initiateLogin(state, url, callback);
   };
 
 })();

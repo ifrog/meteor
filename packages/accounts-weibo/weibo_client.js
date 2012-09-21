@@ -1,5 +1,5 @@
 (function () {
-  Meteor.loginWithWeibo = function () {
+  Meteor.loginWithWeibo = function (callback) {
     if (!Meteor.accounts.weibo._clientId || !Meteor.accounts.weibo._appUrl)
       throw new Meteor.accounts.ConfigError("Need to call Meteor.accounts.weibo.config first");
 
@@ -12,7 +12,7 @@
           '&redirect_uri=' + Meteor.accounts.weibo._appUrl + '/_oauth/weibo?close' +
           '&state=' + state;
 
-    Meteor.accounts.oauth.initiateLogin(state, loginUrl);
+    Meteor.accounts.oauth.initiateLogin(state, loginUrl, callback);
   };
 
 }) ();

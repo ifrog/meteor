@@ -1,5 +1,5 @@
 (function () {
-  Meteor.loginWithGoogle = function () {
+  Meteor.loginWithGoogle = function (callback) {
     if (!Meteor.accounts.google._clientId || !Meteor.accounts.google._appUrl)
       throw new Meteor.accounts.ConfigError("Need to call Meteor.accounts.google.config first");
 
@@ -25,7 +25,7 @@
           '&redirect_uri=' + Meteor.accounts.google._appUrl + '/_oauth/google?close' +
           '&state=' + state;
 
-    Meteor.accounts.oauth.initiateLogin(state, loginUrl);
+    Meteor.accounts.oauth.initiateLogin(state, loginUrl, callback);
   };
 
 }) ();

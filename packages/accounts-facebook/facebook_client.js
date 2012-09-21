@@ -1,5 +1,5 @@
 (function () {
-  Meteor.loginWithFacebook = function () {
+  Meteor.loginWithFacebook = function (callback) {
     if (!Meteor.accounts.facebook._appId || !Meteor.accounts.facebook._appUrl)
       throw new Meteor.accounts.ConfigError("Need to call Meteor.accounts.facebook.config first");
 
@@ -17,7 +17,7 @@
           '&redirect_uri=' + Meteor.accounts.facebook._appUrl + '/_oauth/facebook?close' +
           '&display=' + display + '&scope=' + scope + '&state=' + state;
 
-    Meteor.accounts.oauth.initiateLogin(state, loginUrl);
+    Meteor.accounts.oauth.initiateLogin(state, loginUrl, callback);
   };
 
 })();

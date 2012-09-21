@@ -35,3 +35,10 @@ Meteor.users = new Meteor.Collection(
 Meteor.accounts.ConfigError = function(description) {
   this.message = description;
 };
+
+// Thrown when the user cancels the login process (eg, closes an oauth
+// popup, declines retina scan, etc)
+Meteor.accounts.LoginCancelledError = function(description) {
+  this.message = description;
+  this.cancelled = true;
+};
