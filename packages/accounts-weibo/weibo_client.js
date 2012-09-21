@@ -1,7 +1,9 @@
 (function () {
   Meteor.loginWithWeibo = function (callback) {
-    if (!Meteor.accounts.weibo._clientId || !Meteor.accounts.weibo._appUrl)
-      throw new Meteor.accounts.ConfigError("Need to call Meteor.accounts.weibo.config first");
+    if (!Meteor.accounts.weibo._clientId || !Meteor.accounts.weibo._appUrl) {
+      callback && callback(new Meteor.accounts.ConfigError("Need to call Meteor.accounts.weibo.config first"));
+      return;
+    }
 
     var state = Meteor.uuid();
     // XXX need to support configuring access_type and scope

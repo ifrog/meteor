@@ -1,7 +1,9 @@
 (function () {
   Meteor.loginWithFacebook = function (callback) {
-    if (!Meteor.accounts.facebook._appId || !Meteor.accounts.facebook._appUrl)
-      throw new Meteor.accounts.ConfigError("Need to call Meteor.accounts.facebook.config first");
+    if (!Meteor.accounts.facebook._appId || !Meteor.accounts.facebook._appUrl) {
+      callback && callback(new Meteor.accounts.ConfigError("Need to call Meteor.accounts.facebook.config first"));
+      return;
+    }
 
     var state = Meteor.uuid();
     var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
